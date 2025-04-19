@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Essence of History</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <section id="cover-page" class="cover">
+    <div class="cover-content">
+      <h1>The Essence of History</h1>
+      <p>Group 1</p>
+      <p class="credits">By Rhaiza Alberto from ACT-AD 1</p>
+      <button onclick="enterSite()">Enter</button>
+    </div>
+  </section>
+
+  <!-- MAIN PAGE -->
+  <main id="main-content" style="display: none;">
+    <div class="left-panel">
+      <img id="guide" src="assests/images/guide.png" alt="Guide Character" class="guide-pixel">
+    </div>
+
+    <div class="right-panel">
+      <h2>Select a Topic</h2>
+      <div class="card-grid">
+
+        <!-- Topic 1 -->
+        <div class="info-card" onclick="toggleInfo('definition-info', 'audio-definition')">
+          <p>📜 What is History?</p>
+        </div>
+        <div class="info-text" id="definition-info">
+          <p>
+            History is the study and record of past events, particularly in human affairs. It tells the story of civilizations—how people lived, what they believed in, how they governed themselves, and how they overcame challenges. History is not just a list of dates and facts; it is a living narrative that helps us understand the development of cultures, institutions, values, and societies over time. Through history, we gain insight into human behavior, decisions, and the causes and effects that have shaped the world we live in today.
+          </p>
+          <audio id="audio-definition" src="assests/history.mp3"></audio>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="info-card" onclick="toggleInfo('value-info', 'audio-value')">
+          <p>🌍 Why is History Important?</p>
+        </div>
+        <div class="info-text" id="value-info">
+          <p>
+            History is essential because it connects the present with the past. It helps us learn from earlier mistakes and achievements, guiding us to make better decisions today and in the future. Without history, societies would lack direction and identity. It fosters a sense of belonging and continuity by reminding us of our cultural heritage, shared struggles, and milestones. Studying history also develops critical thinking, empathy, and awareness of global issues that remain relevant across generations.
+          </p>
+          <audio id="audio-value" src="assests/importance.mp3"></audio>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="info-card" onclick="toggleInfo('sources-info', 'audio-sources')">
+          <p>📁 What are Primary Sources?</p>
+        </div>
+        <div class="info-text" id="sources-info">
+          <p>
+            Primary sources are original, firsthand accounts or evidence created during the time an event occurred. These sources are not interpreted or analyzed by others and serve as direct windows into the past. They include documents like letters, speeches, diaries, photographs, official records, artifacts, and even interviews. Historians use primary sources to build accurate and authentic narratives about events, people, and cultures. These materials are vital because they preserve the voices and experiences of those who lived through history.
+          </p>
+          <audio id="audio-sources" src="assests/primary.mp3"></audio>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="info-card" onclick="toggleInfo('types-info', 'audio-types')">
+          <p>🧩 Types of Primary Sources</p>
+        </div>
+        <div class="info-text" id="types-info">
+          <p>
+            There are many types of primary sources, each offering different kinds of historical insight. Physical objects like human fossils and tools tell us about ancient life. Written materials such as royal decrees, laws, and court records reveal how societies were governed. Personal letters, journals, and memoirs give us intimate views of individual thoughts and experiences. Maps and travel logs help us understand exploration and geography. Speeches and interviews capture emotion and opinion, while newspapers and magazines provide contemporary perspectives. In the digital age, online databases, blogs, and recorded videos are now considered modern primary sources, expanding how we preserve and study history.
+          </p>
+          <audio id="audio-types" src="assests/types.mp3"></audio>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function enterSite() {
+  document.getElementById('cover-page').style.display = 'none';
+  document.getElementById('main-content').style.display = 'flex';
+}
+
+function toggleInfo(infoId, audioId) {
+  const guideImg = document.getElementById('guide');
+  const allInfos = document.querySelectorAll('.info-text');
+  const allAudios = document.querySelectorAll('audio');
+
+  // Hide other info boxes and pause other audios
+  allInfos.forEach(info => {
+    if (info.id !== infoId) {
+      info.style.display = 'none';
+    }
+  });
+
+  allAudios.forEach(audio => {
+    if (audio.id !== audioId) audio.pause();
+  });
+
+  const infoBox = document.getElementById(infoId);
+  const audio = document.getElementById(audioId);
+
+  if (infoBox.style.display === 'none') {
+    infoBox.style.display = 'block';
+    guideImg.src = 'assests/images/guide-talking.png';
+    audio.currentTime = 0;
+    audio.play();
+    audio.onended = () => {
+      guideImg.src = 'assests/images/guide.png';
+    };
+  } else {
+    infoBox.style.display = 'none';
+    audio.pause();
+    guideImg.src = 'assests/images/guide.png';
+  }
+}
+
+  </script>
+</body>
+</html>
